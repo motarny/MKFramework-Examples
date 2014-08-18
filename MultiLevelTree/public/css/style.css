@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+body
+{
+	font-family:Arial;
+}
+
+header, footer
+{
+	margin:20px;
+	padding:20px;
+	background:#d0d0d0;
+}
+
+
+.jobInfo
+{
+	margin:40px;
+	margin-bottom:0;
+	background:#505050;
+	color:#ffffff;
+	padding:10px;
+}
+
+.jobOutput
+{
+	margin:0px 40px 40px;
+	padding:20px;
+	border:1px dotted #909090;
+}
