@@ -7,14 +7,14 @@ use MKFramework\Autoloader\Autoloader;
 class Bootstrap extends MKFramework\BootstrapAbstract
 {
 
-
-
     protected function initDoctrineDbConnection()
     {
+        // TODO check config, init db if config parameters exists
+        
         $config = new \Doctrine\DBAL\Configuration();
     
         $connectionParams = array(
-            'dbname' => 'testing',
+            'dbname' => 'multileveltree',
             'user' => 'test',
             'password' => 'test',
             'host' => 'localhost',
