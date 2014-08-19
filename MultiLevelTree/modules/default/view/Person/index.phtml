@@ -1,20 +1,25 @@
 
 INDEX Person Info
 
-<div style="margin:50px">
+<div class="personTree">
 
-    <?php 
+    <?php
+     
         foreach ($v->personsTree as $person)
         {
             ?>
-            <div class="person" style="padding:3px; margin:5px; margin-left:<?= $person['poziom'] * 40 - 40 ?>px; border:1px solid #909090;">
+            <div class="person" style="margin-left:<?= $person['poziom'] * 40 - 40 ?>px;">
             <div class="name">
                 <span class="level" style="font-size:11px">poziom: <B><?= $person['poziom'] ?></B></span>
                 <?php echo $person['Name'] . ' ' . $person['Surname'] . ' [id: <B>' . $person['PersonId'] . '</B>]'?></div>
-                <div class="uptree" style="font-size:10px; margin:0 10px 8px"><?php echo $person['sciezka'] ?></div>
+                <div class="uptree"><?php echo $person['sciezka'] ?></div>
             </div>
             <?php 
         }
+        
+        
+    
+        //echo json_encode($v->personsTree);
     
     
     ?>

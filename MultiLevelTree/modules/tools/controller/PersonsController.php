@@ -1,6 +1,5 @@
 <?php
 
-use model;
 class PersonsController extends MKFramework\Controller\ControllerAbstract
 {
 
@@ -13,9 +12,9 @@ class PersonsController extends MKFramework\Controller\ControllerAbstract
     {
         $this->view->info = "Przygotowuje bazę osób";
 
-        $creator = new PersonsTablesCreator();
+        $creator = new model\PersonsTablesCreator();
         
-        $results = $creator->createPersonsTree(50);
+        $results = $creator->createPersonsTree(10);
         
         
         

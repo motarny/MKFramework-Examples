@@ -1,32 +1,43 @@
+<?php
+// z folderu /modules
+$layout->helper->addHeadCssFile('css/styletools.css');
+$layout->helper->addHeadJsFile('js/jquerytools.js');
+
+
+// z roota
+$layout->helper->addHeadCssFile('css/style.css', false);
+$layout->helper->addHeadJsFile('js/jquery.js', false);
+
+?>
 
 <!DOCTYPE html>
 
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <?php
+    $layout->helper->getHeadJs();
+    $layout->helper->getHeadCss();
+    ?>
 </head>
 
 <body>
 
-    <header>
-        MKF MultiLevelTree TOOLS
-    </header>
+	<header> MKF MultiLevelTree TOOLS </header>
 
-    
-    <div class="jobInfo">
-        job output:  
-        Module: <B><?= MKFramework\Director::getModuleName(); ?></B> | 
-        Controller: <B><?= MKFramework\Director::getControllerName(); ?></B> | 
-        Job: <B><?= MKFramework\Director::getJobName(); ?></B>
-    
-    </div>
-    
-    <div class="jobOutput">    
+
+	<div class="jobInfo">
+		job output: Module: <B><?= MKFramework\Director::getModuleName(); ?></B>
+		| Controller: <B><?= MKFramework\Director::getControllerName(); ?></B>
+		| Job: <B><?= MKFramework\Director::getJobName(); ?></B>
+
+	</div>
+
+	<div class="jobOutput">    
         <?php echo $layout->getViewContent(); ?>
     </div>
 
-   
+
 
 </body>
 

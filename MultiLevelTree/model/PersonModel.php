@@ -107,7 +107,8 @@ class PersonModel extends ModelAbstract
                 LEFT JOIN persons_connections as pc
                 ON p.PersonID = pc.potomek
                 WHERE p.PersonID IN 
-                        (SELECT potomek from persons_connections WHERE pc.przodek = '{$przodek}' and pc.potomek <> '{$przodek}' order by pc.sciezka)
+                        (SELECT potomek from persons_connections WHERE pc.przodek = '{$przodek}' and pc.potomek <> '{$przodek}')
+                ORDER BY pc.sciezka
             ;
             ";
         

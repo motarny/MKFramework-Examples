@@ -6,7 +6,7 @@ RewriteRule ^(.*)\.(gif|jpg|png|jpeg|css|js|swf)$ /$1.$2 [L,NC]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-zA-Z0-9\/\-_]+)\.?([a-zA-Z]+)?$ index.php?url=$1&extension=$2 [QSA,L]
+RewriteRule ^([a-zA-Z0-9\/\-_]+)\.?([$a-zA-Z0-9\/\-_&=,+;.\ \[\]]+)?$ index.php?url=$1&params=$2 [QSA,L]
 
 
 SetEnv APPLICATION_ENV production

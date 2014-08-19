@@ -7,7 +7,7 @@ use MKFramework\Autoloader\Autoloader;
 class Bootstrap extends MKFramework\BootstrapAbstract
 {
 
-    protected function initDoctrineDbConnection()
+    protected function launchDoctrineDbConnection()
     {
         // TODO check config, init db if config parameters exists
         
@@ -27,5 +27,7 @@ class Bootstrap extends MKFramework\BootstrapAbstract
         Director::setDbSupport($conn);
     
     }
+    
+   
     
 }

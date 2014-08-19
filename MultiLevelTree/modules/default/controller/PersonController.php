@@ -12,7 +12,7 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
     protected function indexJob()
     {
         
-        $personTree = PersonModel::getPersonFullTree(1);
+        $personTree = PersonModel::getPersonFullTree(100);
         
         $this->view->personsTree = $personTree;
         

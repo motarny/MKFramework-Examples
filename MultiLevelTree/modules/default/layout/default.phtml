@@ -1,38 +1,48 @@
-
+<?php
+$layout->helper->addHeadCssFile('css/style.css');
+$layout->helper->addHeadJsFile('js/jquery.js');
+?>
 <!DOCTYPE html>
 
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="/MKFrameworkExamples/MultiLevelTree/public/css/style.css">
+    <?php
+    $layout->helper->getHeadJs();
+    $layout->helper->getHeadCss();
+    ?>
 </head>
 
 <body>
 
-    <header>
-        NESSUN FRAMEWORK - default layout START
-    </header>
+	<header> NESSUN FRAMEWORK - default layout START </header>
 
-    
-    <div class="jobInfo">
-        job output:  
-        Module: <B><?= MKFramework\Director::getModuleName(); ?></B> | 
-        Controller: <B><?= MKFramework\Director::getControllerName(); ?></B> | 
-        Job: <B><?= MKFramework\Director::getJobName(); ?></B>
-    
-    </div>
-    
-    <div class="jobOutput">    
+
+	<div class="jobInfo">
+		job output: Module: <B><?= MKFramework\Director::getModuleName(); ?></B>
+		| Controller: <B><?= MKFramework\Director::getControllerName(); ?></B>
+		| Job: <B><?= MKFramework\Director::getJobName(); ?></B> | Params: <B><?php echo http_build_query (MKFramework\Director::getRouter()->getParams()); ?></B>
+
+
+	</div>
+
+	<div class="jobOutput">    
         <?php echo $layout->getViewContent(); ?>
     </div>
 
 
-    
-    
-    <footer>
-        NESSUN FRAMEWORK - default layout END
-    </footer>
-    
+
+
+	<footer> NESSUN FRAMEWORK - default layout END 
+	
+	<div class="bottomMenu">
+	
+	   <a href="<?= $layout->helper->getUrl(array('module' => 'tools')); ?>">link do TOOLS</a>
+	
+	</div>
+	
+	</footer>
+
 
 </body>
 

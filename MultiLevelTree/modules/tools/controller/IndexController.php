@@ -10,7 +10,9 @@ class IndexController extends MKFramework\Controller\ControllerAbstract
     
     protected function indexJob()
     {
-        $this->view->info = "Narzêdzia";        
+        $this->view->info = "NarzÄ™dzia";
+
+        echo MKFramework\Director::getRouter()->getParams('theta');
     }
 
 }
