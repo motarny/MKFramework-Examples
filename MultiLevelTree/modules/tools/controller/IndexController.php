@@ -16,5 +16,3 @@ class IndexController extends MKFramework\Controller\ControllerAbstract
     }
 
 }
-
-?>

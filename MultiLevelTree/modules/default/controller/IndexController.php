@@ -8,17 +8,24 @@ class IndexController extends MKFramework\Controller\ControllerAbstract
     protected function preLauncher()
     {
         // $this->view->disable();
-        $this->_router = MKFramework\Director::getRouter(); 
+        $this->_router = MKFramework\Director::getRouter();
+         
     }
     
     protected function indexJob()
     {
         
-        echo $this->_router->getParams('balfa');       
+        //$navi = MKFramework\Director::getNavigation();
+        
+        
         
     }
 
 
-}
+    protected function postLauncher()
+    {
 
-?>
+    }
+    
+    
+}

@@ -10,7 +10,3 @@ require_once 'Launcher.php';
 
 MKFramework\Launcher::launchFrameworkApplication($configFile);
 
-
-
-
-?>

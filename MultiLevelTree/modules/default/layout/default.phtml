@@ -15,8 +15,11 @@ $layout->helper->addHeadJsFile('js/jquery.js');
 
 <body>
 
-	<header> NESSUN FRAMEWORK - default layout START </header>
+	<header> NESSUN FRAMEWORK - default layout START - (c) by <?php echo $layout->_('Marcin'); ?></header>
 
+	<div class="mainMenu">
+	   <?= $layout->mainMenu; ?>
+	</div>
 
 	<div class="jobInfo">
 		job output: Module: <B><?= MKFramework\Director::getModuleName(); ?></B>

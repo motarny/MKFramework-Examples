@@ -21,5 +21,3 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
 
 
 }
-
-?>

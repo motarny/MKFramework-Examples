@@ -2,6 +2,7 @@
 use MKFramework\Director as Director;
 use MKFramework\Config\Config as Config;
 use MKFramework\View\View as View;
+use MKFramework\Multilang as Multilang;
 use MKFramework\Autoloader\Autoloader;
 
 class Bootstrap extends MKFramework\BootstrapAbstract
@@ -27,6 +28,9 @@ class Bootstrap extends MKFramework\BootstrapAbstract
         Director::setDbSupport($conn);
     
     }
+    
+    
+   
     
    
     
