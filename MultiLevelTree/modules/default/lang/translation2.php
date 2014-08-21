@@ -1,5 +1,7 @@
 <?php
 
+// views
+
 $translation = 
 array (
     array('pl', 'en', 'esp'),

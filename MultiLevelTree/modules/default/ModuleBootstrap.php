@@ -9,87 +9,223 @@ class ModuleBootstrap extends MKFramework\BootstrapAbstract
 
     protected function launchMultilang()
     {
+        $session = Director::getSession();
+        
         $multilang = MKFramework\Multilang\Factory::getInstance('array');
-        $multilang->addResources('translation.php')->addResources('translation2.php')->setLanguage('esp');
-    
+        $multilang->addResources('translation.php')
+            ->addResources('translation2.php')
+            ->setLanguage($session->lang);
+        
         Director::setMultilang($multilang);
     }
-    
-    
+
     protected function launchCreateNavigation()
     {
+        $helper = new MKFramework\View\Helper();
+        
+        $link_personsIndex = $helper->getUrl(array(
+            'module' => 'default',
+            'controller' => 'person',
+            'job' => 'index'
+        ));
+        $link_personsFullTree = $helper->getUrl(array(
+            'module' => 'default',
+            'controller' => 'person',
+            'job' => 'fulltree'
+        ));
+        
         $moduleMenu = array(
             array(
-                'label' => 'O firmie',
-                'title' => 'Dowiedz się wiecej o naszej firmie',
-                'cssClass' => 'mainCompany',
+                'label' => ':: MENU TEST ::',
+                'title' => 'Głębokie menu, tylko w celach prezentacyjnych',
+                'cssClass' => 'deep',
                 'content' => array(
                     array(
-                        'label' => 'Historia firmy',
-                        'title' => 'Długie wywody o tym skąd jesteśmy',
+                        'label' => 'To jest',
+                        'title' => 'ten tag title może być zdefiniowany',
                         'link' => '###',
                         'target' => '_blank'
                     ),
                     array(
-                        'label' => 'Pracownicy spółki',
-                        'title' => 'Nasza zwariowana ekipa',
+                        'label' => 'Tylko test',
+                        'title' => 'ten tag title może być zdefiniowany',
                         'link' => '###',
                         'content' => array(
                             array(
-                                'label' => 'Prezes i zarząd',
-                                'title' => 'O naszym prezesie!',
+                                'label' => 'Które może zawierać',
+                                'title' => 'ten tag title może być zdefiniowany',
                                 'link' => '###'
                             ),
                             array(
-                                'special' => 'separator'
+                                'special' => 'NONOseparator'
                             ),
                             array(
-                                'label' => 'Dział księgowości',
-                                'title' => 'Miłe panie, które trzymają papiery',
-                                'link' => '###'
-                            ),
-                            array(
-                                'label' => 'Nasi graficy',
-                                'title' => 'Szalona drużyna naszych artystów',
+                                'label' => 'Wiele zdefiniowanych',
+                                'title' => 'ten tag title może być zdefiniowany',
                                 'link' => '###',
                                 'content' => array(
                                     array(
-                                        'label' => 'Freelancerzy',
+                                        'label' => 'Za pomocą',
                                         'title' => 'Ludzie, z którymi współpracujemy doraźnie',
                                         'link' => '###'
                                     ),
                                     array(
-                                        'label' => 'Pracownicy etatowi',
+                                        'label' => 'Zagnieżdzonych tablic',
                                         'title' => 'Nasza stała gwardia',
+                                        'link' => '###',
+                                        'content' => array(
+                                            array(
+                                                'label' => 'Dowolnie zdefiniowanych',
+                                                'title' => 'Ludzie, z którymi współpracujemy doraźnie',
+                                                'link' => '###'
+                                            ),
+                                            array(
+                                                'label' => 'Lub wygenerowanych',
+                                                'title' => 'Ludzie, z którymi współpracujemy doraźnie',
+                                                'link' => '###'
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            array(
+                                'label' => 'Zagnieżdzonych poziomów',
+                                'title' => 'ten tag title może być zdefiniowany',
+                                'link' => '###',
+                                'content' => array(
+                                    array(
+                                        'label' => 'Dzięki czemu',
+                                        'title' => 'Ludzie, z którymi współpracujemy doraźnie',
                                         'link' => '###'
+                                    ),
+                                    array(
+                                        'label' => 'Można stworzyć',
+                                        'title' => 'Nasza stała gwardia',
+                                        'link' => '###',
+                                        'content' => array(
+                                            array(
+                                                'label' => 'Bardzo szczegółową',
+                                                'title' => 'Ludzie, z którymi współpracujemy doraźnie',
+                                                'link' => '###'
+                                            ),
+                                            array(
+                                                'label' => 'Mapkę linków',
+                                                'title' => 'Ludzie, z którymi współpracujemy doraźnie',
+                                                'link' => '###'
+                                            ),
+                                            array(
+                                                'label' => 'W menu nawigacyjnym',
+                                                'title' => 'Ludzie, z którymi współpracujemy doraźnie',
+                                                'link' => '###',
+                                                'content' => array(
+                                                    array(
+                                                        'label' => 'Nawet na',
+                                                        'title' => 'Ludzie, z którymi współpracujemy doraźnie',
+                                                        'link' => '###'
+                                                    ),
+                                                    array(
+                                                        'label' => 'Szóstym poziomie!',
+                                                        'title' => 'Ludzie, z którymi współpracujemy doraźnie',
+                                                        'link' => '###'
+                                                    )
+                                                )
+                                            )
+                                            
+                                        )
                                     )
                                 )
                             )
                         )
                     ),
                     array(
-                        'label' => 'Nasi partnerzy',
-                        'title' => 'Z jakimi firmami współpracujemy',
+                        'label' => 'Bardzo rozbudowanego',
+                        'title' => 'ten tag title może być zdefiniowany',
+                        'link' => '###'
+                    ),
+                    array(
+                        'label' => 'Menu nawigacyjnego',
+                        'title' => 'ten tag title może być zdefiniowany',
                         'link' => '###'
                     )
                 )
-            ),
+            )
+            ,
             array(
-                'label' => 'Galeria zdjęć',
-                'title' => 'zobacz nas w obiektywie'
+                'label' => 'Przegląd członków sieci ML',
+                'link' => $link_personsIndex,
+                'content' => array(
+                    array(
+                        'label' => 'Info i poziom podstawowy',
+                        'link' => $link_personsIndex
+                    ),
+                    array(
+                        'label' => 'Pokaż całą sieć [długie ładowanie >5s]',
+                        'cssClass' => 'caution',
+                        'link' => $link_personsFullTree
+                    )
+                )
             ),
             array(
                 'special' => 'separator'
             ),
             array(
-                'label' => 'Mapka dojazdu',
-                'title' => 'Zobacz gdzie jestesmy i jak dojechać',
-                'cssClass' => 'map'
+                'label' => 'O aplikacji',
+                'cssClass' => 'about',
+                'link' => $helper->getUrl(array(
+                    'controller' => 'info',
+                    'job' => 'about'
+                )),
+                'content' => array(
+                    array(
+                        'label' => 'MultiLevelTree',
+                        'title' => 'Co to właściwie jest?',
+                        'link' => $helper->getUrl(array(
+                            'controller' => 'info',
+                            'job' => 'author'
+                        ))
+                    ),
+                    array(
+                        'label' => 'Autor - Marcin Klimczuk',
+                        'title' => 'O autorze projektu',
+                        'link' => $helper->getUrl(array(
+                            'controller' => 'info',
+                            'job' => 'author'
+                        ))
+                    ),
+                    array(
+                        'label' => 'MK Framework',
+                        'title' => 'O frameworku aplikacji',
+                        'link' => $helper->getUrl(array(
+                            'controller' => 'info',
+                            'job' => 'mkframework'
+                        ))
+                    )
+                )
             ),
             array(
-                'label' => 'Formularz kontaktowy',
-                'title' => 'Skontaktuj się z nami',
-                'cssClass' => 'contact'
+                'label' => 'Wybierz język',
+                'content' => array(
+                    array(
+                        'label' => 'polski',
+                        'link' => $helper->getUrl(array(
+                            'controller' => 'lang',
+                            'job' => 'set',
+                            'params' => array(
+                                'lang' => 'pl'
+                            )
+                        ))
+                    ),
+                    array(
+                        'label' => 'angielski',
+                        'link' => $helper->getUrl(array(
+                            'controller' => 'lang',
+                            'job' => 'set',
+                            'params' => array(
+                                'lang' => 'en'
+                            )
+                        ))
+                    )
+                )
             )
         );
         
@@ -98,8 +234,4 @@ class ModuleBootstrap extends MKFramework\BootstrapAbstract
         
         Director::getLayout()->mainMenu = $navigation->renderNavigation();
     }
-    
-    
-    
-    
 }

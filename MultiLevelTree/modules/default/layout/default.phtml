@@ -1,5 +1,6 @@
 <?php
 $layout->helper->addHeadCssFile('css/style.css');
+$layout->helper->addHeadCssFile('css/topmenu.css');
 $layout->helper->addHeadJsFile('js/jquery.js');
 ?>
 <!DOCTYPE html>
@@ -15,36 +16,65 @@ $layout->helper->addHeadJsFile('js/jquery.js');
 
 <body>
 
-	<header> NESSUN FRAMEWORK - default layout START - (c) by <?php echo $layout->_('Marcin'); ?></header>
+	<header>
+		<div class="container">
+			<div class="welcome">
+				<h1>MultiLevelTree</h1>
+				<h2><?= $layout->_('Prezentacja drzewa')?></h2>
+			</div>
+			
+			<div class="rightColumn">
+    			
+                <div class="jobInfo">
+                    <label>Router::getRouting() & Router::getParams()</label>
+    				<div class="element">
+    					<label>Module</label><span><?= MKFramework\Director::getModuleName(); ?></span>
+    				</div>
+    				<div class="element">
+    					<label>Controller</label><span><?= MKFramework\Director::getControllerName(); ?></span>
+    				</div>
+    				<div class="element">
+    					<label>Job</label><span><?= MKFramework\Director::getJobName(); ?></span>
+    				</div>
+    				<div class="element">
+    					<label>Params</label><span><?php echo http_build_query (MKFramework\Director::getRouter()->getParams()); ?></span>
+    				</div>
+    
+    
+    		      </div>
+		      
+		      </div>
+
+		</div>
+
+	</header>
+
 
 	<div class="mainMenu">
-	   <?= $layout->mainMenu; ?>
+		<div class="container">
+	       <?= $layout->mainMenu; ?>
+	    </div>
 	</div>
 
-	<div class="jobInfo">
-		job output: Module: <B><?= MKFramework\Director::getModuleName(); ?></B>
-		| Controller: <B><?= MKFramework\Director::getControllerName(); ?></B>
-		| Job: <B><?= MKFramework\Director::getJobName(); ?></B> | Params: <B><?php echo http_build_query (MKFramework\Director::getRouter()->getParams()); ?></B>
+
+	<div class="content" style="">
+
+
+
+
+
+		<div class="container">
+			<div class="jobOutput">    
+                <?php echo $layout->getViewContent(); ?>
+            </div>
+		</div>
 
 
 	</div>
 
-	<div class="jobOutput">    
-        <?php echo $layout->getViewContent(); ?>
-    </div>
 
 
 
-
-	<footer> NESSUN FRAMEWORK - default layout END 
-	
-	<div class="bottomMenu">
-	
-	   <a href="<?= $layout->helper->getUrl(array('module' => 'tools')); ?>">link do TOOLS</a>
-	
-	</div>
-	
-	</footer>
 
 
 </body>

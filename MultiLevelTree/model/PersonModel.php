@@ -98,7 +98,7 @@ class PersonModel extends ModelAbstract
     
     
     
-    static function getPersonFullTree($przodek)
+    static function getPersonFullTree($przodek, $doPoziomu = 999)
     {
         $db = \MKFramework\Director::getDbSupport();
         
@@ -107,7 +107,7 @@ class PersonModel extends ModelAbstract
                 LEFT JOIN persons_connections as pc
                 ON p.PersonID = pc.potomek
                 WHERE p.PersonID IN 
-                        (SELECT potomek from persons_connections WHERE pc.przodek = '{$przodek}' and pc.potomek <> '{$przodek}')
+                        (SELECT potomek from persons_connections WHERE pc.przodek = '{$przodek}' and pc.potomek <> '{$przodek}' and pc.poziom <= '{$doPoziomu}')
                 ORDER BY pc.sciezka
             ;
             ";

@@ -1,4 +1,7 @@
 <?php
+
+/*
+
 $multilang = \MKFramework\Director::getMultilang();
 if (! empty($multilang)) {
     
@@ -11,4 +14,4 @@ if (! empty($multilang)) {
     print_r(\MKFramework\Director::getMultilang()->getMissedTranslations());
 }
 
-?>
+*/

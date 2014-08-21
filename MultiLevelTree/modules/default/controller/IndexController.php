@@ -3,7 +3,7 @@
 class IndexController extends MKFramework\Controller\ControllerAbstract
 {
     
-    private $_router;
+    protected $_router;
 
     protected function preLauncher()
     {
