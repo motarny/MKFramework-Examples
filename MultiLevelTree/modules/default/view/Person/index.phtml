@@ -11,8 +11,8 @@
         $personLink = $view->helper->getUrl(array(
             'module' => 'default',
             'controller' => 'person',
-            'job' => 'tree',
-            'params' => array ('personid' => $person['PersonId'], 'page' => 1, 'reset' => true)
+            'job' => 'show',
+            'params' => array ('personid' => $person['PersonId'])
         )
         );
         

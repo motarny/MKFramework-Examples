@@ -103,15 +103,18 @@ class PersonModel extends ModelAbstract
         $db = \MKFramework\Director::getDbSupport();
         
         $sql = "
-            SELECT * FROM persons as p 
+            SELECT p.PersonId as i, Name as n, Surname as s, przodek as pr, potomek as po, poziom as l, sciezka as r, pts.MyPoints as ptsm, pts.GroupPoints as ptsg
+             FROM persons as p
+                LEFT JOIN persons_points as pts 
+                    ON p.PersonId = pts.PersonId
                 LEFT JOIN persons_connections as pc
-                ON p.PersonID = pc.potomek
-                WHERE p.PersonID IN 
+                    ON p.PersonId = pc.potomek
+                WHERE p.PersonId IN 
                         (SELECT potomek from persons_connections WHERE pc.przodek = '{$przodek}' and pc.potomek <> '{$przodek}' and pc.poziom <= '{$doPoziomu}')
                 ORDER BY pc.sciezka
             ;
             ";
-        
+       
         $stmt = $db->query($sql);
         
         return $stmt->fetchAll();

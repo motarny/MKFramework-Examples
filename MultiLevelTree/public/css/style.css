@@ -110,7 +110,8 @@ footer {
 .personTree .person {
 	margin: 5px;
 	padding: 5px;
-	border-top: 1px dotted #d0d0d0; border-left : 1px dotted #d0d0d0;
+	border-top: 1px dotted #d0d0d0;
+	border-left: 1px dotted #d0d0d0;
 	font-size: 13px;
 	border-left: 1px dotted #d0d0d0;
 }
@@ -121,10 +122,27 @@ footer {
 }
 
 .personTree .person .level {
-	float: right;
+	font-weight: bold;
+	font-size: 12px;
+	text-align:right;
 }
 
 .personTree .person .name {
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: bold;
+}
+
+.personTree .person .uptree {
+	font-weight: normal;
+	text-align: left;
+	font-size: 11px;
+	color: #909090;
+	font-family: Roboto;
+}
+
+
+.personTree .person .points {
+	font-weight: normal;
+	font-size: 12px;
+	text-align:right;
 }

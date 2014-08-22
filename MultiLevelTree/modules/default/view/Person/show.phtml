@@ -1,0 +1,71 @@
+<div class="personInfo">
+
+
+
+</div>
+
+<div class="loadingInfo">
+    <?php echo $this->translate('Proszę czekać, trwa generowanie rozbudowanego drzewa...'); ?>
+</div>
+
+
+<div class="personTree">
+    <div class="documentRoot" style="width:0; height:0; visibility: hidden"><?= DOCUMENT_ROOT; ?></div>
+    <div class="jsonContent" style="width:0; height:0; visibility: hidden"><?php echo json_encode($v->personsTree); ?></div>
+    
+</div>
+
+
+<script lang="javascript">
+
+
+    function generatePersonHtml(index, personData, documentRoot)
+    {
+        var name = '';      if (personData.n != null) name = personData.n;
+        var surname = '';   if (personData.s != null) surname = personData.s;
+        var link = documentRoot + '/default/person/show/$personid=' + personData.i;
+
+        var levelStyle = 'margin-left: ' + parseInt(personData.l * 30 - 30) + 'px;"';
+        
+        uptree = personData.r; // personData.r
+        
+        htmlCode = '' +
+        '<div class="person level_' + personData.l + '" level="' + personData.l + '" style="' + levelStyle + '">' + 
+		'<div class="name">' + 
+		'<div style="float: right">' + 
+		'	<div class="level">poziom: ' + personData.l + '</div>' +
+		'	<div class="points">pkt.: moje: <B>' + personData.ptsm + '</B> | potomków: <B>' + personData.ptsg + '</B></div>' +
+		'</div>' +  
+		'	<span class="name"><a href="' + link + '">' + name + ' ' + surname + '</a></span>' +
+        '    <span class="personid">' + personData.i + '</span>' + 
+        '    <div class="uptree">' + uptree + '</div>' +
+		'</div>' + 
+		'</div>';
+
+        return htmlCode;
+    	
+    }
+
+    
+    $(function() {
+    	var getData = jQuery.parseJSON($("div.jsonContent").html());
+    	$("div.jsonContent").remove();
+
+        var documentRoot = $("div.documentRoot").html();
+        $("div.documentRoot").remove();
+        
+        var treeContent = '';
+    	$.each(getData, function (index, personData) {
+    		var getPersonHtml = '';
+    		getPersonHtml = generatePersonHtml(index, personData, documentRoot);
+    		treeContent = treeContent + getPersonHtml;
+    	});
+
+        $(".personTree").html(treeContent);
+
+        $(".loadingInfo").remove();
+    
+    });
+
+
+</script>

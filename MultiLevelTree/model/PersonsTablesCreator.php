@@ -15,8 +15,8 @@ class PersonsTablesCreator extends ModelAbstract
 //         $sql = "TRUNCATE TABLE awards";
 //         $this->getDb()->query($sql);        
         
-        $this->createTablePersons($personsLimit);
-        $this->createAwards($personsLimit * 5);
+        // $this->createTablePersons($personsLimit);
+        // $this->createAwards($personsLimit * 5);
 
         //$this->createPersonsConnections();
     }
@@ -49,7 +49,7 @@ class PersonsTablesCreator extends ModelAbstract
     }
     
 
-    private function createAwards($limit)
+    public function createAwards($limit)
     {
         // check person max id
         $sql = "SELECT COUNT(PersonId) as cnt FROM persons";

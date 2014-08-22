@@ -12,16 +12,15 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
     protected function indexJob()
     {
         $personTree = PersonModel::getPersonFullTree(1, 1);
-        
+        $this->view->setView('person', 'show');        
         $this->view->personsTree = $personTree;
     }
 
-    protected function treeJob()
+    protected function showJob()
     {
         $personId = $this->getParams('personid');
         
         $personTree = PersonModel::getPersonFullTree($personId);
-        
         $this->view->personsTree = $personTree;
     }
     
@@ -29,7 +28,7 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
     {
         $personTree = PersonModel::getPersonFullTree(1);
         
-        $this->view->setView('person', 'index');
+        $this->view->setView('person', 'show');
         $this->view->personsTree = $personTree;
     }
     

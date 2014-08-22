@@ -14,4 +14,8 @@ array (
     array('Wybierz język', 'Language'),
     array('polski', 'polish'),
     array('angielski', 'english'),
+    
+    array('Narzędzia', 'Tools'),
+    array('Generator nagród', 'Awards generator'),
+    array('Generator uczestników sieci', 'Multi level network generator'),
 );
