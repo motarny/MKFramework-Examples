@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+ul.rightMenu {
+	padding: 0;
+	margin-left: 20px;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+ul.rightMenu li.level_1 {
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+ul.rightMenu li {
+	font-weight: normal;
+}
+
+.rightSupport h3 {
+	margin-top: 0;
+}

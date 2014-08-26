@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+
+/* partner tree */
+.personTree {
+	margin: 40px 10px;
+}
+
+.personTree .person {
+	margin: 5px;
+	padding: 5px;
+	border-top: 1px dotted #d0d0d0;
+	border-left: 1px dotted #d0d0d0;
+	font-size: 13px;
+	border-left: 1px dotted #d0d0d0;
+}
+
+.personTree .person .personid {
+	font-weight: normal;
+	font-size: 12px;
+}
+
+.personTree .person .level {
+	font-weight: bold;
+	font-size: 12px;
+	text-align: right;
+}
+
+.personTree .person .name {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.personTree .person .uptree {
+	font-weight: normal;
+	text-align: left;
+	font-size: 11px;
+	color: #909090;
+	font-family: Roboto;
+}
+
+.personTree .person .points {
+	font-weight: normal;
+	font-size: 12px;
+	text-align: right;
+}
+
+.personInfo {
+	border: 2px dotted #000000;
+	padding: 20px;
+	font-size:17px;
+}
+
+.personInfo label {
+	font-weight:bold;
+	display:inline-block;
+	width:190px;
+	text-align:right;
+	margin-right:10px;
+	font-size:16px;
+}
+
+.personInfo .personId
+{
+	font-size:26px;
+	font-weight:bold;
+	color:#700000;
+}
+
+.personInfo .left {
+	float: left;
+}
+
+.right {
+	float: right;
+	text-align: left;
+	width:300px;
+}

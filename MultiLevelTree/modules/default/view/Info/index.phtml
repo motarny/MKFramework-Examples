@@ -1,0 +1,118 @@
+<h1>
+    O aplikacji
+</h1>
+
+
+<h3>Co to jest?</h3>
+<p>
+Aplikacja Multi Level Tree ma charakter edukacyjno-eksperymentalny. <BR>
+Jej <B>główny cel to testowanie frameworka MK Framework</B> oraz eksperymenty z nieco bardziej zaawansowanym SQL.
+</p>
+<p>
+Aplikacja MultiLevelTree symuluje przechowywanie i wyliczenia dla drzewiastej struktury danych.
+Do przechowywania rekordów wykorzystuje model <B>Tablicy dopełnień</B>.
+</p>
+<p>
+Rekordami w aplikacji są osoby. Każda (prócz osób na poziomie 1) osoba ma w strukturze "rodzica" oraz dowolną ilość "dzieci",
+te dzieci także mają dowolną ilość "dzieci". Struktura teoretycznie może być nieskończona.
+</p>
+<p class="follow">
+Dodawać nowe osoby można w module tools <a href="<?= $v->helper->getUrl(array('module' => 'tools', 'controller' => 'persons', 'job' => 'createPersons')); ?>">w tym miejscu</a>.
+</p>
+
+<p>
+Każda osoba może mieć przyznane "Nagrody" (Awards). Nagrodami są punkty. Jedna nagroda (Award) to losowa liczba punktów (decimal(*,2). Każda osoba posiada więc punkty własne
+(własne nagrody) oraz punkty całej struktury należącej do tej osoby (nagrody wszystkich dzieci).
+</p>
+<p class="follow">
+Nowe punkty można generować w module tools <a href="<?= $v->helper->getUrl(array('module' => 'tools', 'controller' => 'persons', 'job' => 'createAwardsBundle')); ?>">w tym miejscu</a>.
+</p>
+<p>
+Przykładowe zastosowania takich struktur to różnego rodzaju wyliczanie prowizji dla sprzedawców w "networkingach".
+</p>
+
+<p class="follow">
+Lista osób na pierwszym poziomie <a href="<?= $v->helper->getUrl(array('module' => 'default', 'controller' => 'person', 'job' => 'index')); ?>">w tym miejscu</a>.
+</p>
+
+<p class="follow">
+Cała struktura <a href="<?= $v->helper->getUrl(array('module' => 'default', 'controller' => 'person', 'job' => 'fulltree')); ?>">w tym miejscu</a>.<BR>
+Ze względu na rozmiar, czas generowania wynosi kilka-kilkanaście sekund.
+</p>
+
+<p>
+<img src="" />
+</p>
+
+<p>
+Punkty każdej osoby (i jej całej grupy) mogą być policzone jednym rozbudowanym zapytaniem SQL. Jest to możliwe właśnie dzięki
+zastosowaniu modelu tablicy dopełnień. Ponadto, punkty mogą być odczytane z tabeli zawierającej punkty każdej osoby.
+Tabela ta (partners_points) jest uzupełniana automatycznie poprzez ustawione triggery w tabeli awards. Trigger wywołuje odpowiednią
+procedurę. Triggery są ustawiane dla Insert, Update oraz Delete. Dzięki temu tabela partners_points zawiera zawsze aktualne
+wyliczenia.
+</p>
+
+
+
+
+<h4>Tablica sąsiedztwa a tablica dopełnień</h4>
+<p>
+Drzewiasta struktura danych przypomina np. strukturę katalogów na dysku twardym. Każdy katalog (prócz głównego)
+znajduje się w jakimś katalogu oraz może zawierać dowolną ilość podkatalogów. 
+</p>
+<p>
+Zazwyczaj dane w tej formie przechowywane są w prostej formie z wykorzystaniem modelu "tablica sąsiedztwa" (?).
+Tablica sąsiedztwa przechowuje dane w postaci [identyfikator], [identyfikator_rodzica]. Taka forma danych
+jest bardzo łatwa do zapisu, ale stosunkowo trudna do odczytu. W MySQL nie ma rekurencyjnego odczytu, więc
+struktura musi być generowana rekurencyjnie w kodzie. O ile przy niewielkiej ilości rekordów zdaje to egzamin,
+to przy dużej ilości powoduje znaczne spowolnienia i bardzo dużo zapytań do bazy.
+</p>
+<p>
+Tablica dopełnień ma bardziej skomplikowany sposób zapisu, przez co jest trudniejsza w implementacji i jest wolniejsza
+przy dodawaniu nowych rekordów. Jednak jej plusem jest bardzo łatwy i bardzo szybki odczyt całych struktur. W przypadkach,
+gdy ważniejsza jest wydajność odczytu od wydajności zapisu sprawdza się doskonale.
+</p>
+<p class="follow">
+Implementacja odczytu drzewa jest w metodzie <B>getPersonFullTree($przodek)</B> w klasie <a href="https://github.com/motarny/MKFramework-Examples/blob/master/MultiLevelTree/model/PersonModel.php" target=_blank>PersonModel</a>.
+</p>
+
+<p class="follow">
+Implementacja zapisu połączenia zawarta jest w metodzie <B>makeConnection($przodek, $potomek)</B> w klasie <a href="https://github.com/motarny/MKFramework-Examples/blob/master/MultiLevelTree/model/PersonModel.php" target=_blank>PersonModel</a>.
+</p>
+
+
+<h3>Liczby</h3>
+<ul>
+<li>Aktualnie w bazie jest <B><?= $v->cntPersons; ?> osób (persons)</B>
+<li>Aktualnie w bazie jest <B><?= $v->cntAwards; ?> nagród (awards)</B>
+<li>Aktualnie <B>najgłębszy poziom połączenia to <?= $v->maxLevel; ?></B>
+<li>Suma wszystkich nagród wynosi <B><?= $v->totalPoints; ?> punktów</B>
+
+</ul>
+
+
+<h3>Wykorzystane technologie, rozszerzenia</h3>
+<ul>
+
+<li>Aplikacja postawiona jest na autorskim frameworku: MK Framework.
+<li>W bazie MySQL wykorzystywane są triggery i procedury, poustawiane są klucze obce.
+<li>Skrypt PHP wykorzystuje kilka podstawowych funkcjonalności Doctrine 2 (DBAL oraz ORM).
+<li>Wykorzystywany jest Memcached.
+<li>Całość stoi na VPS w firmie OVH - CentOS 6, 1 rdzeń i 1GB RAM. 
+
+</ul>
+
+<h3>Roadmap</h3>
+<ul>
+<li>Implementacja Memcached
+<li>Funkcjonalność przenoszenia osób do innych osób wraz z całą strukturą (i przeliczenie punktów)
+<li>Funkcjonalność usuwania osób (i przenoszenia ich potomków do rodzica usuwanego)
+<li>Eksport drzewa do CSV
+<li>Eksport drzewa do XML
+
+</ul>
+
+<h3>Źródło</h3>
+<p class="follow">
+Cały kod udostępniony jest na GitHub'ie - <a href="https://github.com/motarny/MKFramework-Examples/tree/master/MultiLevelTree" target="_blank">MKFramework-Examples / MultiLevelTree</a>
+</p>

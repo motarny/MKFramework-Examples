@@ -1,19 +1,19 @@
 
-<h1><?php echo $v->_("Wygeneruj nagrody (punkty)"); ?></h1>
+<h1><?php echo $v->_("Wygeneruj nowe osoby"); ?></h1>
 
 <form
-	action="<?= $v->helper->getUrl(array('controller' => 'persons', 'job' => 'createAwardsBundle')); ?>"
+	action="<?= $v->helper->getUrl(array('controller' => 'persons', 'job' => 'createPersons')); ?>"
 	method="post" enctype="application/x-www-form-urlencoded"
 	class="newElements">
 
 	<div class="formElement">
 
-		<label>Podaj ilość nagród do wygenerowania (max 1000): </label>
-		<input type="text" size="3" name="newAwardsCount" id="newAwardsCount" value="<?= $v->formAwardsCount; ?>" />
+		<label>Podaj ilość osób do wygenerowania (max 1000): </label>
+		<input type="text" size="3" name="newPersonsCount" id="newPersonsCount" value="<?= $v->formPersonsCount; ?>" />
     
-    <?php if ($v->error_newAwardsCount) { ?>
+    <?php if ($v->error_newPersonsCount) { ?>
         <div class="error">
-			<B>BŁĄD!</B><BR> Nieprawidłowa ilość nagród. Podaj ilość z zakresu 1 do
+			<B>BŁĄD!</B><BR> Nieprawidłowa ilość osób. Podaj ilość z zakresu 1 do
 			1000.
 		</div>
     <?php } ?>
@@ -23,11 +23,11 @@
 
 	<div class="formElement">
 
-		<label>Dołącz wygenerowane punkty do osoby o id (1-<?= $v->countPersons; ?>): </label>
-		<input type="text" size="5" name="ownerId" id="ownerId" /> <span
+		<label>Dołącz wygenerowane osoby do osoby o id (1-<?= $v->countPersons; ?>): </label>
+		<input type="text" size="5" name="parentId" id="parentId" /> <span
 			class="info">(zostaw puste, jeśli losowo)</span>
     
-    <?php if ($v->error_invalidOwnerId) { ?>
+    <?php if ($v->error_invalidParentId) { ?>
         <div class="error">
 			<B>BŁĄD!</B><BR> Nie ma osoby o podanym numerze id.
 		</div>

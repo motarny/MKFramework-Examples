@@ -1,0 +1,29 @@
+<h2>Dodano nowe osoby do drzewa</h2>
+
+
+<div class="newElements">
+
+<?php foreach ($v->newPersons as $person) { 
+
+    $personLink = $v->helper->getUrl(array(
+        'module' => 'default',
+        'controller' => 'person',
+        'job' => 'show',
+        'params' => array('personid' => $person->getId())
+        )
+     );
+    ?>
+
+    <div class="newElement">
+    
+        <a href="<?= $personLink ?>" target=_blank">
+            <B><?= $person->getId(); ?></B>
+            <span class="parent">rodzic: <?= $person->getParentId(); ?></span>
+            <?= $person->getName(); ?> <?= $person->getSurname(); ?> 
+        </a> 
+    
+    </div>
+
+<?php } ?>
+    
+</div>

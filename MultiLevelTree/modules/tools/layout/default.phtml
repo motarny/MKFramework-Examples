@@ -1,10 +1,11 @@
 <?php
 
 // z roota
-$layout->helper->addHeadCssFile('css/style.css', false);
-$layout->helper->addHeadCssFile('css/topmenu.css',false);
+$layout->helper->addHeadCssFile('css/style.css', FROM_DEFAULT_MODULE);
+$layout->helper->addHeadCssFile('css/topmenu.css',FROM_DEFAULT_MODULE);
+$layout->helper->addHeadCssFile('css/rightmenu.css');
 $layout->helper->addHeadCssFile('css/styletools.css');       // nadpisuje pare styli
-$layout->helper->addHeadJsFile('js/jquery.js', false);
+$layout->helper->addHeadJsFile('js/jquery.js', FROM_DEFAULT_MODULE);
 
 ?>
 
@@ -17,6 +18,7 @@ $layout->helper->addHeadJsFile('js/jquery.js', false);
     $layout->helper->getHeadJs();
     $layout->helper->getHeadCss();
     ?>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -25,7 +27,7 @@ $layout->helper->addHeadJsFile('js/jquery.js', false);
 		<div class="container">
 			<div class="welcome">
 				<h1>MultiLevelTree TOOLS</h1>
-				<h2><?= $layout->_('Zestaw narzędzi do Multi Level Tree')?></h2>
+				<h2><?= $layout->_('Narzędzia do Multi Level Tree')?></h2>
 			</div>
 			
 			<div class="rightColumn">
@@ -61,9 +63,26 @@ $layout->helper->addHeadJsFile('js/jquery.js', false);
 	    </div>
 	</div>
 
-	<div class="jobOutput">    
-        <?php echo $layout->getViewContent(); ?>
-    </div>
+
+	<div class="content" style="">
+
+		<div class="container">
+			<div class="jobOutput">    
+                <?php echo $layout->getViewContent(); ?>
+            </div>
+            
+            <div class="rightSupport">
+                <h3>Tools menu</h3>
+                <?= $layout->moduleRightMenu; ?>
+            </div>
+            
+		</div>
+
+
+	</div>
+
+
+
 
 
 

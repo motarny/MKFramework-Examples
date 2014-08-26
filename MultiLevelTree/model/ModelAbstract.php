@@ -13,7 +13,7 @@ class ModelAbstract
 
     protected function getDb()
     {
-        return Director::getDbSupport();
+        return Director::getDbalSupport();
     }
     
 }

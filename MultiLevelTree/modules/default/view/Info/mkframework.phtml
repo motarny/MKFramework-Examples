@@ -1,0 +1,66 @@
+<h1>
+    MK Framework
+</h1>
+
+<p>
+W ramach pogłębiania wiedzy w różnych dziedzinach postanowiłem stworzyć własny framework, który mógłby również być 
+wykorzystywany w projektach.
+</p>
+<p>
+MK Framework oparty jest o wzorzec MVC, inspiracją był Zend Framework oraz różne ksiązki i publikacje. 
+Projekt schematu i kodowanie całowicie samodzielne, chyba, że w konkretnych modułach jest opisane inaczej (moduł Session jest zapożyczony).
+</p>
+
+<p class="follow">
+Kod frameworka dostępny jest na GitHubie - <a href="https://github.com/motarny/MKFramework" target=_blank>motarny / MKFramework</a>
+</p>
+
+<h3>Struktura katalogów i plików aplikacji w MKF</h3>
+<p>
+do uzupełnienia
+</p>
+
+<h3>Schemat urchomieniowy MK Frameworka</h3>
+<ol>
+
+    <li>index.php aplikacji wczytuje konfigurację, dołącza Launcher.php z frameworka i odpala <B>Launcher::launchFrameworkApplication()</B>; następuje: 
+    <ol>
+        <li>inicjalizacja Autoloadera klas
+        <li>inicjalizacja komponentu Registry i wczytanie doń konfiguracji aplikacji
+        <li><B>Director</B>. Inicjalizacja głównego komponentu Director. Director kolejno:
+        <ol>
+            <li>uruchamia sesję
+            <li>inicjuje komponent <B>Router</B> (ustala co ma być wykonane - jaki moduł, jaki kontroler i jaka akcja (job) w kontrolerze, oraz pobiera parametry z url i dane z $_POST)
+            <li>inicjuje <b>Layout</b> (układ HTML dla modułu)
+            <li>inicjuje <b>View</b> (wynik działania Controller/Job wrzucany do Layout)
+            <li>inicjuje <b>Bootstrap</b> - kolejno Bootstrap.php aplikacji oraz ModuleBootstrap.php dla modułu (jeśli istnieje). W boostrapach można umieścić rózne akcje, które będą się wykonywać przed jobem kontrolera
+            <li>na podstawie danych z Routera uruchamiany jest job w odpowiednim kontrolerze w odpowiednim module.
+            <li>wynik renderowany może być np. na ekran lub do pliku
+            <li>wczytywany jest plik Finish.php (jeśli istnieje) aplikacji
+        </ol>            
+    </ol>
+</ol>
+
+<h3>Co udało się już zrobić</h3>
+<ul>
+<li>Komponent Autoloader
+<li>Komponent Multilang - umożliwia tłumaczenia tekstów w widokach (View) i layoutach.
+<li>Komponent Navigation - generuje dowolnie rozbudowane menu nawigacyjne
+<li>Komponent Registry - globalny kontener dla danych w aplikacji
+<li>Komponent Router - obsługa adresów, parametrów, pobranie danych z formularzy
+<li>Komponent Session - obsługa sesji, moduł zapożyczony z forum manuala PHP :) 
+<li>Obsługa Layoutów dla modułów - każdy moduł może mieć zupełnie inny wygląd (np. osobno sklep dla klienta i osobno admin)
+<li>Implementacja Doctrine
+</ul>
+
+<h3>Do zrobienia lub poprawienia</h3>
+<ul>
+<li>Uzupełnienie dokumentacji phpDoc
+<li>Testy jednostkowe
+<li>Dodanie i obsługa wyjątków, framework bardziej odporny na nietypowe sytuacje
+<li>Uspranienie komponentu Multilang (symboliczne odwołania do tłumaczeń, obsługa tłumaczeń w innych formatach, np. XML)
+<li>Podstawowa obsługa formularzy (jakieś walidatory np.)
+<li>Obsługa autoryzacji i autentykacji
+<li>Obsługa redirectów i forwardów - aby jakiś job mógł odpalić inny job
+<li>....  
+</ul>

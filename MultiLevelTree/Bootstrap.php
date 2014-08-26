@@ -8,45 +8,59 @@ use MKFramework\Autoloader\Autoloader;
 class Bootstrap extends MKFramework\BootstrapAbstract
 {
 
+    private $_connectionParams = array(
+        'dbname' => 'multileveltree',
+        'user' => 'test',
+        'password' => 'test',
+        'host' => 'localhost',
+        'driver' => 'pdo_mysql',
+        'charset' => 'utf8'
+    );
+
+    protected function launchInitConstants()
+    {
+        define('FROM_DEFAULT_MODULE', false);
+    }
+
     protected function launchDoctrineDbConnection()
     {
         // TODO check config, init db if config parameters exists
-        
         $config = new \Doctrine\DBAL\Configuration();
-    
-        $connectionParams = array(
-            'dbname' => 'multileveltree',
-            'user' => 'test',
-            'password' => 'test',
-            'host' => 'localhost',
-            'driver' => 'pdo_mysql',
-            'charset' => 'utf8'
-        );
-    
-        $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
-    
-        Director::setDbSupport($conn);
-    
+        
+        $conn = \Doctrine\DBAL\DriverManager::getConnection($this->_connectionParams, $config);
+        
+        Director::setDbalSupport($conn);
     }
-    
-    
-    
+
+    protected function launchDoctrineEntityManager()
+    {
+        $isDevMode = true;
+        
+        $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(array(
+            __DIR__ . '/src'
+        ), $isDevMode);
+        
+        $entityManager = \Doctrine\ORM\EntityManager::create($this->_connectionParams, $config);
+        
+        Director::setOrmSupport($entityManager);
+    }
+
     protected function launchMultilang()
     {
         $session = Director::getSession();
-    
+        
         $multilang = MKFramework\Multilang\Factory::getInstance('array');
         $multilang->addResources('translation.php')
-        ->addResources('translation2.php')
-        ->setLanguage($session->lang);
-    
+            ->addResources('translation2.php')
+            ->setLanguage($session->lang);
+        
         Director::setMultilang($multilang);
     }
-    
+
     protected function launchCreateNavigation()
     {
         $helper = new MKFramework\View\Helper();
-    
+        
         $link_personsIndex = $helper->getUrl(array(
             'module' => 'default',
             'controller' => 'person',
@@ -57,8 +71,8 @@ class Bootstrap extends MKFramework\BootstrapAbstract
             'controller' => 'person',
             'job' => 'fulltree'
         ));
-    
-        $moduleMenu = array(
+        
+        $applicationMenu = array(
             array(
                 'label' => ':: MENU TEST ::',
                 'title' => 'Głębokie menu, tylko w celach prezentacyjnych',
@@ -156,7 +170,6 @@ class Bootstrap extends MKFramework\BootstrapAbstract
                                             )
                                         )
                                     )
-    
                                 )
                             )
                         )
@@ -211,6 +224,34 @@ class Bootstrap extends MKFramework\BootstrapAbstract
                             'controller' => 'persons',
                             'job' => 'createAwardsBundle'
                         ))
+                    ),
+                    array(
+                        'label' => 'Eksport danych',
+                        'content' => array(
+                            array(
+                                'label' => 'Eksportuj do CSV',
+                                'link' => $helper->getUrl(array(
+                                    'module' => 'tools',
+                                    'controller' => 'export',
+                                    'job' => 'csv'
+                                ))
+                            ),
+                            array(
+                                'label' => 'Eksportuj do XML',
+                                'link' => $helper->getUrl(array(
+                                    'module' => 'tools',
+                                    'controller' => 'export',
+                                    'job' => 'xml'
+                                ))
+                            )
+                        )
+                    ),
+                    array(
+                        'label' => 'Ustawienia',
+                        'link' => $helper->getUrl(array(
+                            'module' => 'tools',
+                            'controller' => 'settings'
+                        ))
                     )
                 )
             ),
@@ -227,22 +268,25 @@ class Bootstrap extends MKFramework\BootstrapAbstract
                 'label' => 'O aplikacji',
                 'cssClass' => 'about',
                 'link' => $helper->getUrl(array(
+                    'module' => 'default',
                     'controller' => 'info',
-                    'job' => 'about'
+                    'job' => 'index'
                 )),
                 'content' => array(
                     array(
                         'label' => 'MultiLevelTree',
                         'title' => 'Co to właściwie jest?',
                         'link' => $helper->getUrl(array(
+                            'module' => 'default',
                             'controller' => 'info',
-                            'job' => 'author'
+                            'job' => 'index'
                         ))
                     ),
                     array(
                         'label' => 'Autor - Marcin Klimczuk',
                         'title' => 'O autorze projektu',
                         'link' => $helper->getUrl(array(
+                            'module' => 'default',
                             'controller' => 'info',
                             'job' => 'author'
                         ))
@@ -251,6 +295,7 @@ class Bootstrap extends MKFramework\BootstrapAbstract
                         'label' => 'MK Framework',
                         'title' => 'O frameworku aplikacji',
                         'link' => $helper->getUrl(array(
+                            'module' => 'default',
                             'controller' => 'info',
                             'job' => 'mkframework'
                         ))
@@ -263,6 +308,7 @@ class Bootstrap extends MKFramework\BootstrapAbstract
                     array(
                         'label' => 'polski',
                         'link' => $helper->getUrl(array(
+                            'module' => 'default',
                             'controller' => 'lang',
                             'job' => 'set',
                             'params' => array(
@@ -273,6 +319,7 @@ class Bootstrap extends MKFramework\BootstrapAbstract
                     array(
                         'label' => 'angielski',
                         'link' => $helper->getUrl(array(
+                            'module' => 'default',
                             'controller' => 'lang',
                             'job' => 'set',
                             'params' => array(
@@ -283,15 +330,10 @@ class Bootstrap extends MKFramework\BootstrapAbstract
                 )
             )
         );
-    
+        
         $navigation = \MKFramework\Navigation\Factory::getInstance('ul');
-        $navigation->setNavigationElements($moduleMenu);
-    
+        $navigation->setNavigationElements($applicationMenu);
+        
         Director::getLayout()->mainMenu = $navigation->renderNavigation();
     }
-    
-   
-    
-   
-    
 }

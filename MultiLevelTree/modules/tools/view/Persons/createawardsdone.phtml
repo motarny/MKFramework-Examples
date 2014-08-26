@@ -1,0 +1,33 @@
+<h2>Dodano nowe nagrody (punkty)</h2>
+
+
+
+<div class="newElements">
+
+<?php foreach ($v->newAwards as $award) { 
+
+    $personLink = $v->helper->getUrl(array(
+        'module' => 'default',
+        'controller' => 'person',
+        'job' => 'show',
+        'params' => array('personid' => $award['ownerId'])
+        )
+     );
+    ?>
+
+    <div class="newElement">
+    
+        <a href="<?= $personLink ?>" target=_blank">
+            Otrzymał: <B><?= $award['ownerId']; ?></B>
+            |
+            ile: <B><?= $award['points']; ?></B>
+            
+        </a> 
+    
+    </div>
+
+<?php } ?>
+
+
+
+</div>

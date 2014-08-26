@@ -80,12 +80,12 @@
 
 
 
-
 .mainMenu ul li {
 	display: inline-block;
 	padding-right: 40px;
 	line-height: 35px;
 	white-space: nowrap;
+	color:#000000;
 }
 
 .mainMenu ul li.level_1 {

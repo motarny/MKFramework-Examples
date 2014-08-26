@@ -1,3 +1,74 @@
 header {
 	background: #802020;
 }
+
+.jobOutput {
+	width: 650px;
+	float: left;
+}
+
+.rightSupport {
+	float: right;
+	width: 200px;
+	text-align: left;
+	border-left: 1px dotted #a0a0a0;
+	padding: 20px;
+	margin-top: 20px;
+}
+
+.error {
+	margin: 10px;
+	padding: 10px;
+	background: #ffe0e0;
+	width: 100%;
+	font-size: 16px;
+	font-weight: normal;
+	color: red;
+}
+
+form.newElements input {
+	font-size: 20px;
+	width: 80px;
+	text-align: center;
+}
+
+form.newElements div.formElement {
+	margin-top: 30px;
+}
+
+form.newElements label {
+	width: 370px;
+	display: inline-block;
+	text-align: right;
+	font-weight: bold;
+}
+
+form.newElements span.info {
+	font-size: 13px;
+	font-weight: normal;
+}
+
+.newElements span.parent {
+	width: 80px;
+	font-size: 13px;
+	display: inline-block;
+	text-align: left;
+	padding-left: 20px;
+}
+
+.newElements .newElement 
+{
+	border-bottom:1px solid #d0d0d0;
+	padding:3px;
+	margin-bottom:3px;
+}
+
+.newElements .newElement:hover
+{
+	background:#e0e0e0;
+}
+
+.newElements .newElement a
+{
+	text-decoration:none;
+}
