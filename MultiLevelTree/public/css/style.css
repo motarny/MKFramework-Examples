@@ -113,3 +113,25 @@ p.follow {
 	font-size: 14px;
 	font-weight: bold;
 }
+
+label.settings
+{
+	font-size:19px;
+	font-weight:bold;
+	display:block;
+	margin:10px 0;
+}
+
+em.red
+{
+	color:red;
+	font-weight:bold;
+	font-size:1.3em;
+}
+
+em.green
+{
+	color:green;
+	font-weight:bold;
+	font-size:1.3em;
+}

@@ -1,1 +1,55 @@
-TOOLS SETTINGS
+<h1>Ustawienia i opcje</h1>
+
+
+<label class="settings"> Memcached </label>
+
+<?php
+if ($v->isMemcachedEnabled) {
+    $turnOffMemcachedLink = $v->helper->getUrl(array(
+        'controller' => 'settings',
+        'module' => 'tools',
+        'job' => 'index',
+        'params' => array(
+            'memcached' => 'disable'
+        )
+    ));
+    ?>
+    Memcached jest
+<em class="green">WŁĄCZONY</em>
+.
+<a href="<?= $turnOffMemcachedLink; ?>"><button>WYŁĄCZ MEMCACHED</button></a>
+
+<div class="memcachedStats">
+
+aa1
+
+<?php 
+
+    print_r(\MKFramework\Director::getMemcache()->getStats());
+
+?>
+
+</div>
+
+
+<?php
+} else {
+    
+    $turnOnMemcachedLink = $v->helper->getUrl(array(
+        'controller' => 'settings',
+        'module' => 'tools',
+        'job' => 'index',
+        'params' => array(
+            'memcached' => 'enable'
+        )
+    ));
+    ?>
+    Memcached jest
+<em class="red">WYŁĄCZONY</em>
+.
+<a href="<?= $turnOnMemcachedLink; ?>"><button>WŁĄCZ MEMCACHED</button></a>
+
+<?php
+}
+
+?>

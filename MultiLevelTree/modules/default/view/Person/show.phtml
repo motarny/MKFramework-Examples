@@ -1,66 +1,86 @@
-<?php 
+<?php
 $personId = MKFramework\Director::getRouter()->getParams('personid');
-if (!empty($personId)) {
-?>
+if (! empty($personId)) {
+    ?>
 <div class="personInfo">
 
-    <div class="left">
-        <div class="personId">
-            <label><?= $v->_('Identyfikator')?> :</label>
+	<div class="left">
+		<div class="personId">
+			<label><?= $v->_('Identyfikator')?> :</label>
             <?php echo $v->personObj->getId();?>    
         </div>
-        <div class="personName">
-            <label><?= $v->_('Imię i nazwisko')?> :</label>
+		<div class="personName">
+			<label><?= $v->_('Imię i nazwisko')?> :</label>
             <?php echo $v->personObj->getName() . ' ' . $v->personObj->getSurname();?>
         </div>
-        
-        <div class="parentInfo">
-        
-            <label><?php echo $v->_("Informacje o rodzicu")?> :</label>
+
+		<?php if ($personId != 1) { ?>
+		<div class="parentInfo">
+
+			<label><?php echo $v->_("Informacje o rodzicu")?> :</label>
             
             <?php
-                $parentLink = $v->helper->getUrl(array(
-                'controller' => 'person',
-                'job' => 'show', 
-                'params' => array('personid' => $v->parentObj->getId()),
-                )); 
-            ?>
-            <a href="<?= $parentLink ?>" title="<?= $v->_('Otwórz panel rodzica'); ?>">
+    $parentLink = $v->helper->getUrl(array(
+        'controller' => 'person',
+        'job' => 'show',
+        'params' => array(
+            'personid' => $v->parentObj->getId()
+        )
+    ));
+    ?>
+            <a href="<?= $parentLink ?>"
+				title="<?= $v->_('Otwórz panel rodzica'); ?>">
                 <?php echo $v->parentObj->getName() . ' ' . $v->parentObj->getSurname();?>
                 <span class="ident">[id: <?php echo $v->parentObj->getId();?>]</span>
-            </a>
-            
-        </div>
-        
-    </div>
-    
-    <div class="right">
-        <div class="sumPoints">
-            <label><?= $v->_('Suma punktów')?> :</label>
+			</a>
+
+		</div>
+		
+		<?php } ?>
+
+	</div>
+
+	<div class="right">
+		<div class="sumPoints">
+			<label><?= $v->_('Suma punktów')?> :</label>
             <?php echo sprintf("%01.2f", $v->personObj->getPoints()->getSumPoints());?>    
-        </div>        
-        <div class="myPoints">
-            <label><?= $v->_('Moje punkty')?> :</label>
+        </div>
+		<div class="myPoints">
+			<label><?= $v->_('Moje punkty')?> :</label>
             <?php echo sprintf("%01.2f", $v->personObj->getPoints()->getMyPoints());?>    
         </div>
-        <div class="groupPoints">
-            <label><?= $v->_('Punkty grupy (potomków)')?> :</label>
+		<div class="groupPoints">
+			<label><?= $v->_('Punkty grupy (potomków)')?> :</label>
             <?php echo sprintf("%01.2f", $v->personObj->getPoints()->getGroupPoints());?>    
         </div>
-    </div>
-    
-    <div class="clear"></div>
-    
+	</div>
+
+	<div class="clear"></div>
+
+	<div class="export">
+        <?php
+    $csvExportLink = $v->helper->getUrl(array(
+        'module' => 'tools',
+        'controller' => 'export',
+        'job' => 'csv',
+        'params' => array('personId' => $v->personObj->getId())
+    ));
+    $xmlExportLink = $v->helper->getUrl(array(
+        'module' => 'tools',
+        'controller' => 'export',
+        'job' => 'xml',
+        'params' => array('personId' => $v->personObj->getId())
+    ));
+    ?>
+        <span><a href="<?= $csvExportLink; ?>">eksportuj do CSV</a></span> <span><a href="<?= $xmlExportLink; ?>">eksportuj do XML</a></span>
+	</div>
+
 </div>
 
 
 <?php } ?>
 
-<div class="parentInfo">
-
-    
-
-</div>
+<div class="parentInfo"></div>
 
 <div class="loadingInfo">
     <?php echo $this->translate('Proszę czekać, trwa generowanie rozbudowanego drzewa...'); ?>
@@ -68,9 +88,11 @@ if (!empty($personId)) {
 
 
 <div class="personTree">
-    <div class="documentRoot" style="width:0; height:0; visibility: hidden"><?= DOCUMENT_ROOT; ?></div>
-    <div class="jsonContent" style="width:0; height:0; visibility: hidden"><?php echo json_encode($v->personsTree); ?></div>
-    
+	<div class="documentRoot"
+		style="width: 0; height: 0; visibility: hidden"><?= DOCUMENT_ROOT; ?></div>
+	<div class="jsonContent"
+		style="width: 0; height: 0; visibility: hidden"><?php echo json_encode($v->personsTree); ?></div>
+
 </div>
 
 

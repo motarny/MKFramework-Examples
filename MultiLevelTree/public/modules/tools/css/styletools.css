@@ -26,24 +26,29 @@ header {
 	color: red;
 }
 
-form.newElements input {
+form input {
 	font-size: 20px;
 	width: 80px;
 	text-align: center;
 }
 
-form.newElements div.formElement {
+form input[type=submit]
+{
+	width:auto;
+}
+
+form div.formElement {
 	margin-top: 30px;
 }
 
-form.newElements label {
+form label {
 	width: 370px;
 	display: inline-block;
 	text-align: right;
 	font-weight: bold;
 }
 
-form.newElements span.info {
+form span.info {
 	font-size: 13px;
 	font-weight: normal;
 }

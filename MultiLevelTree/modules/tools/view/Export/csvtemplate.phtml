@@ -1,0 +1,26 @@
+<?php 
+
+$separator = ";";
+
+echo 'Id;';
+echo 'Imię;';
+echo 'Nazwisko;';
+echo 'Poziom;';
+echo 'Suma punktów;';
+echo 'Moje punkty;';
+echo 'Punkty potomków;'; 
+echo "\n";
+
+foreach ($v->personTree as $child)
+{
+    echo $child['i'] . $separator;
+    echo $child['n'] . $separator;
+    echo $child['s'] . $separator;
+    echo $child['l'] . $separator;
+    echo str_replace(".", ",", $child['ptsm'] + $child['ptsg']) . $separator;
+    echo str_replace(".", ",", $child['ptsm']) . $separator;
+    echo str_replace(".", ",", $child['ptsg']);
+    echo "\n";
+}
+
+

@@ -1,3 +1,48 @@
-<h1>
-    STRONA GŁÓWNA EKSPORTU XML
-</h1>
+
+<h1><?php echo $v->_("Eksportuj dane do"); ?> XML</h1>
+
+<form
+	action="<?= $v->helper->getUrl(array('controller' => 'export', 'job' => 'xml')); ?>"
+	method="post" enctype="application/x-www-form-urlencoded"
+	class="exportForm">
+
+
+	<div class="formElement">
+
+		<label>Podaj id osoby do eksportu: </label>
+		<input type="text" size="5" name="personId" id="personId" value="<?= $v->personId; ?>" />
+    
+    <?php if ($v->error_invalidPersonId) { ?>
+        <div class="error">
+			<B>BŁĄD!</B><BR> Nie ma osoby o podanym numerze id.
+		</div>
+    <?php } ?>
+    
+</div>
+
+	<div class="formElement">
+		<input type="submit" value="Eksportuj" id="addButton" />
+	</div>
+
+</form>
+
+
+<script lang="javascript">
+
+$(function() {
+	$("#addButton").mouseup(function() {
+		$(this).attr("value", "Proszę czekać... To może trochę potrwać...");
+		$(this).attr("disabled", "disabled");
+		$(this).css("width", "auto");
+		$("form.exportForm").submit();
+
+		setInterval(function()
+				{
+			$("#addButton").attr("value", "Eksportuj");
+			$("#addButton").removeAttr("disabled");
+			   }, 5000);
+		
+	});
+});
+
+</script>

@@ -5,7 +5,7 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
 {
 
     protected $_orm;
-    
+
     protected function preLauncher()
     {
         $this->_orm = \MKFramework\Director::getOrmSupport();
@@ -14,7 +14,8 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
     protected function indexJob()
     {
         $personTree = PersonModel::getPersonFullTree(1, 1);
-        $this->view->setView('person', 'show');        
+        
+        $this->view->setView('person', 'show');
         $this->view->personsTree = $personTree;
     }
 
@@ -22,24 +23,28 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
     {
         $personId = $this->getParams('personid');
         
+        if (! PersonModel::checkPersonExists($personId)) {
+            throw new \MKFramework\Exception\Exception();
+        }
+        
         // get PersonInfo
         $personObj = $this->_orm->find('model\PersonModel', $personId);
         
-        // get ParentInfo
-        $parentId = $personObj->getParentId();
-        $parentObj = $this->_orm->find('model\PersonModel', $parentId);
-
-                
+        if ($personId != 1) {
+            // get ParentInfo
+            $parentId = $personObj->getParentId();
+            $parentObj = $this->_orm->find('model\PersonModel', $parentId);
+        }
+        
         // add both to view
         $this->view->personObj = $personObj;
         $this->view->parentObj = $parentObj;
-        
         
         // get Tree
         $personTree = PersonModel::getPersonFullTree($personId);
         $this->view->personsTree = $personTree;
     }
-    
+
     protected function fulltreeJob()
     {
         $personTree = PersonModel::getPersonFullTree(1);
@@ -47,10 +52,4 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
         $this->view->setView('person', 'show');
         $this->view->personsTree = $personTree;
     }
-    
-    
-    
-    
-    
-    
 }

@@ -47,31 +47,40 @@
 .personInfo {
 	border: 2px dotted #000000;
 	padding: 20px;
-	font-size:17px;
+	font-size: 17px;
 }
 
 .personInfo label {
-	font-weight:bold;
-	display:inline-block;
-	width:190px;
-	text-align:right;
-	margin-right:10px;
-	font-size:16px;
+	font-weight: bold;
+	display: inline-block;
+	width: 190px;
+	text-align: right;
+	margin-right: 10px;
+	font-size: 16px;
 }
 
-.personInfo .personId
-{
-	font-size:26px;
-	font-weight:bold;
-	color:#700000;
+.personInfo .personId {
+	font-size: 26px;
+	font-weight: bold;
+	color: #700000;
 }
 
 .personInfo .left {
 	float: left;
 }
 
+.personInfo .export {
+	margin-top: 10px;
+	text-align: right;
+	font-size: 13px;
+}
+
+.personInfo .export span {
+	padding-left:10px;
+}
+
 .right {
 	float: right;
 	text-align: left;
-	width:300px;
+	width: 300px;
 }

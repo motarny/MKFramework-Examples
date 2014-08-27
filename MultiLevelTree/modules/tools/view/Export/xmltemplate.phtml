@@ -1,0 +1,37 @@
+<?= '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'; ?>
+
+<personinfo>
+
+<persondata id="<?= $v->personObj->getId(); ?>" >
+
+    <id><?= $v->personObj->getId(); ?></id>
+    <name><?= $v->personObj->getName(); ?></name>
+    <surname><?= $v->personObj->getSurname(); ?></surname>
+    <points>
+        <my><?= $v->personObj->getPoints()->getMyPoints(); ?></my>
+        <group><?= $v->personObj->getPoints()->getGroupPoints(); ?></group>
+        <sum><?= $v->personObj->getPoints()->getSumPoints(); ?></sum>
+    </points>
+
+</persondata>
+
+<childs>
+
+<?php foreach ($v->personTree as $child) { ?>
+    <child id="<?= $child['i']; ?>" >
+        <id><?= $child['i']; ?></id>
+        <name><?= $child['n']; ?></name>
+        <surname><?= $child['s']; ?></surname>
+        <level><?= $child['l']; ?></level>
+        <points>
+            <my><?= str_replace(".", ",", $child['ptsm']) ?></my>
+            <group><?= str_replace(".", ",", $child['ptsg']) ?></group>
+            <sum><?= str_replace(".", ",", $child['ptsm'] + $child['ptsg']) ?></sum>
+        </points>
+    </child>
+<?php } ?>
+
+</childs>
+
+
+</personinfo>
