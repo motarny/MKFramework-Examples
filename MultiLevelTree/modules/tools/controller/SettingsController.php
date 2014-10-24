@@ -4,6 +4,9 @@ class SettingsController extends MKFramework\Controller\ControllerAbstract
 {
 
     
+    /*
+     * Narzędzia
+     */
     protected function indexJob()
     {
         $isMemcachedEnabled = \MKFramework\Director::getSession()->isMemcachedEnabled;

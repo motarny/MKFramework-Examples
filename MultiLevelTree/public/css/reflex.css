@@ -1,0 +1,27 @@
+.reflexFullOutput {
+clear: both;
+margin-top: 50px;
+text-align: left;
+margin: 50px auto;
+font-family: Courier;
+background: #e0e0e0;
+padding: 50px;
+}
+
+.reflexContent {
+padding: 20px;
+background: #e0e0f0;
+margin: 20px;
+font-size: 12px;
+}
+
+.reflexTitle {
+font-weight: bold;
+font-size: 20px;
+margin-bottom: 10px;
+}
+
+.reflexDescription {
+font-size: 15px;
+}
+

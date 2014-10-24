@@ -1,5 +1,7 @@
 <?php
 use model\PersonModel;
+use MKFramework\Reflex\Reflex;
+use MKFramework\Reflex\ReflexManager;
 
 class PersonController extends MKFramework\Controller\ControllerAbstract
 {
@@ -17,6 +19,18 @@ class PersonController extends MKFramework\Controller\ControllerAbstract
         
         $this->view->setView('person', 'show');
         $this->view->personsTree = $personTree;
+        
+        
+        $reflex = new Reflex(array(
+            'type'      => 'phpsource',
+            'title'     => 'PersonModel::getPersonFullTree() php source',
+            'content'   =>  ReflexManager::getFunctionPhpSource('model\PersonModel', 'getPersonFullTree'),
+        ));
+        
+        ReflexManager::addReflex($reflex);
+        
+        
+        
     }
 
     protected function showJob()

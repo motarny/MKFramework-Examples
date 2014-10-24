@@ -1,0 +1,22 @@
+<div class="reflexFullOutput">
+
+<?php
+
+
+foreach ($reflexArray as $reflex)
+{
+    $type = $reflex->type;
+    $content =  nl2br(str_replace(" ", "&nbsp;", $reflex->content));  
+    
+    echo "<div class=\"reflexContainer {$type}\">";
+        echo "<div class=\"reflexTitle\">{$reflex->title}</div>";
+        echo "<div class=\"reflexDescription\">{$reflex->description}</div>";
+        echo "<div class=\"reflexContent\">{$content}</div>";
+    echo "</div>";
+    
+}
+
+
+?>
+
+</div>
